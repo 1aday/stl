@@ -30,11 +30,13 @@ export const CustomizationForm: React.FC<CustomizationFormProps> = ({
             element
         });
 
+        const inputValue = values[element.id] || element.defaultValue || '';
+
         if (element.type.toLowerCase() === 'color') {
             return (
                 <input
                     type="color"
-                    value={values[element.id] || element.defaultValue}
+                    value={inputValue.startsWith('#') ? inputValue : `#${inputValue}`}
                     onChange={(e) => handleInputChange(element.id, e.target.value)}
                     className="w-full h-10"
                 />
@@ -44,7 +46,7 @@ export const CustomizationForm: React.FC<CustomizationFormProps> = ({
         return (
             <input
                 type="text"
-                value={values[element.id] || element.defaultValue}
+                value={inputValue}
                 onChange={(e) => handleInputChange(element.id, e.target.value)}
                 className="w-full px-3 py-2 border rounded-md"
                 placeholder={element.defaultValue}

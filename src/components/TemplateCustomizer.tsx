@@ -42,7 +42,10 @@ export const TemplateCustomizer: React.FC = () => {
 
     const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
-        if (!file) return;
+        if (!file) {
+            setError('No file selected');
+            return;
+        }
 
         if (!file.name.toLowerCase().endsWith('.stl')) {
             setError('Please upload a valid STL file');
@@ -54,7 +57,6 @@ export const TemplateCustomizer: React.FC = () => {
             setError(null);
             const parsedTemplate = await TemplateParser.parseSTLFile(file);
 
-            // Set initial customization values from template defaults
             const initialValues: CustomizationValues = {};
             parsedTemplate.elements.forEach(element => {
                 if (element.defaultValue) {
@@ -64,7 +66,7 @@ export const TemplateCustomizer: React.FC = () => {
             setCustomization(initialValues);
             setTemplate(parsedTemplate);
         } catch (err) {
-            setError('Failed to parse STL file');
+            setError(err instanceof Error ? err.message : 'Failed to parse STL file');
             console.error(err);
         } finally {
             setLoading(false);

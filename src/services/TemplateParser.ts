@@ -91,10 +91,11 @@ export class TemplateParser {
             if (file.name.toLowerCase().endsWith('.stl')) {
                 reader.onload = (e) => {
                     try {
-                        // Check if it's binary (solid not at start)
                         const content = e.target?.result;
+                        if (!content) {
+                            throw new Error('Failed to read file content');
+                        }
                         if (content instanceof ArrayBuffer) {
-                            // It's binary
                             const view = new Uint8Array(content);
                             let str = '';
                             for (let i = 0; i < view.length; i++) {
@@ -102,13 +103,13 @@ export class TemplateParser {
                             }
                             resolve(str);
                         } else {
-                            // It's ASCII
-                            resolve(content as string);
+                            resolve(content);
                         }
                     } catch (error) {
-                        reject(error);
+                        reject(error instanceof Error ? error : new Error('Unknown error'));
                     }
                 };
+                reader.onerror = () => reject(new Error('Failed to read file'));
                 reader.readAsArrayBuffer(file);
             } else {
                 reject(new Error('Not an STL file'));
