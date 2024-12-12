@@ -5,7 +5,7 @@ export async function GET() {
     try {
         const fontPath = getFontPath();
         return NextResponse.json({ fontPath });
-    } catch (error) {
+    } catch {
         return NextResponse.json({ error: 'Failed to setup fonts' }, { status: 500 });
     }
 } 
