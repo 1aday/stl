@@ -5,6 +5,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { CustomizationValues } from '../types/template';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
+import { getFontPath } from '../lib/fonts';
 
 interface STLViewerProps {
     stlData: string;
@@ -183,7 +184,7 @@ export const STLViewer: React.FC<STLViewerProps> = ({ stlData, customization }) 
 
         // Add text to the model
         const loader = new FontLoader();
-        const fontUrl = '/fonts/helvetiker_regular.typeface.json';
+        const fontUrl = getFontPath();
 
         fetch('/api/setup')
             .then(() => {

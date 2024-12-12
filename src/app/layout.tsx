@@ -1,12 +1,9 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata } from 'next/dist/lib/metadata/types/metadata-interface';
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "STL Template Customizer",
-  description: "Customize and preview STL files in real-time",
+  title: "STL Viewer",
+  description: "A simple STL viewer with customization options",
 };
 
 export default function RootLayout({
@@ -16,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }
