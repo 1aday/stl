@@ -1,12 +1,11 @@
+import { getFontPath } from '@/lib/fonts';
 import { NextResponse } from 'next/server';
-import { ensureFontExists } from '@/lib/fonts';
 
 export async function GET() {
     try {
-        await ensureFontExists();
-        return NextResponse.json({ success: true });
+        const fontPath = getFontPath();
+        return NextResponse.json({ fontPath });
     } catch (error) {
-        console.error('Font setup error:', error);
-        return NextResponse.json({ success: false, error: 'Font setup failed' }, { status: 500 });
+        return NextResponse.json({ error: 'Failed to setup fonts' }, { status: 500 });
     }
 } 

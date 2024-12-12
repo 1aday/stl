@@ -37,4 +37,8 @@ export async function ensureFontExists() {
         console.error('Error ensuring font exists:', error);
         return false;
     }
-} 
+}
+
+export const getFontPath = () => {
+    return '/fonts/helvetiker_regular.typeface.json';
+}; 

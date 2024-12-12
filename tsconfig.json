@@ -19,10 +19,14 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "three/addons/*": [
+      "@/*": [
+        "./src/*"
+      ],
+      "three/examples/jsm/*": [
         "./node_modules/three/examples/jsm/*"
       ]
-    }
+    },
+    "baseUrl": "."
   },
   "include": [
     "next-env.d.ts",
