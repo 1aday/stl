@@ -32,7 +32,7 @@ export class TemplateParser {
                 // Use a more strict regex that only matches our template format
                 const match = trimmedLine.match(/^# TEMPLATE_(COLOR|TEXT)_([a-zA-Z_]+)\s+(.+)$/);
                 if (match) {
-                    const [_, type, id, value] = match;
+                    const [, type, id, value] = match;
                     if (!id.includes('walls')) { // Extra safety check
                         elements.push(this.createTemplateElement(type, id, value));
                     }
